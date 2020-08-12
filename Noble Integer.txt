@@ -1,0 +1,41 @@
+public class Solution
+{
+    public int index_search(int t[], int l, int h, int k)
+    {
+        // Binary Search for Index in Sorted array, 
+        //from which all elments are greater than key
+        int def=-1;
+        while(l <= h)
+        {
+            int m=(l+h)/2;
+            if(t[m] > k)
+            {
+                h=m-1;
+                def=m;
+            }
+            else if(t[m] <= k)
+                l=m+1;
+        }
+        return def;
+    }
+    public int solve(int[] A)
+    {
+        int n=A.length;
+        //Make Temporary Array which will be sorted
+        int t[]=Arrays.copyOf(A,n);
+        //Temporary Array Sorted
+        Arrays.sort(t);
+        for(int i=0; i<n; i++)
+        {
+            //Find the Starting index from which all elements are greater than A[i]
+            int index=index_search(t,0,n-1,A[i]);
+            //Unless returned index is -1, we find number of elements greater than A[i]
+            int count=(index != -1) ? n-index : 0;
+            //Compare the count of greater elements than A[i]; return 1 if same
+            if(A[i]==count)
+                return 1;
+        }
+        return -1;
+    }
+    
+}
