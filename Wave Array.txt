@@ -1,0 +1,21 @@
+public class Solution 
+{
+    public int[] wave(int[] A) 
+    {
+        int n=A.length;
+        int out[]=new int[n];
+        Arrays.sort(A);
+        int limit=((n&1)==0 ? n : n-1);
+        for(int i=0; i<limit; i++)
+        {
+            if((i&1)==0)
+                out[i+1]=A[i];
+            else
+                out[i-1]=A[i];
+        }
+        if(limit!=n)
+            out[n-1]=A[n-1];
+        
+        return out;
+    }
+}
