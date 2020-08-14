@@ -1,0 +1,36 @@
+class Pair
+{
+    Integer value,index;
+    public Pair(int v, int i){ value=(Integer)v; index=(Integer)i;}
+}
+
+class MyComparator implements Comparator<Pair>
+{
+    public int compare(Pair p1, Pair p2)
+    {
+        return p1.value.compareTo(p2.value);
+    }
+}
+
+public class Solution 
+{
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int maximumGap(final int[] A)
+    {
+        int n=A.length;
+        Pair p[]=new Pair[n];
+        for(int i=0; i<n; i++)
+            p[i]=new Pair(A[i],i);
+        Arrays.sort(p,new MyComparator());
+        int diff=0, min=Integer.MAX_VALUE;
+        
+        for(int i=0; i<n; i++)
+        {
+            if(p[i].index < min)
+                min=p[i].index;
+            else if(p[i].index-min > diff)
+                diff=p[i].index-min;
+        }
+        return diff;
+    }
+}
